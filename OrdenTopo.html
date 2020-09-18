@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Grafo</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="assets/css/noscript.css" />
+	<link href="vis.css" type="text/css">
+	<link href="popup.css" type="text/css">
+	<link rel="stylesheet" href="estiloOT.css">
+	<link rel="icon" type="image/png" href="faviconED.png">
+	<!-- SCRIPTS ORDENAMIENTO TOPO-->
+	<script src="vis.js" type="text/javascript"></script>
+	<script src="jsgraphs.js" type="text/javascript"></script>
+
+
+	<!-- end-->
+</head>
+
+<body class="is-preload">
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<h1 id="logo"><a href="index.html">Inicio</a></h1>
+			<nav id="nav">
+				<ul>
+					<li><a href="OrdenTopo.html">Ordenamieto Topológico</a></li>
+					<li><a href="PuntoArticu.html">Puntos de articulación</a></li>
+					<!-- <li>
+							<a href="#">Layouts</a>
+							<ul>
+								<li><a href="left-sidebar.html">Left Sidebar</a></li>
+								<li><a href="right-sidebar.html">Right Sidebar</a></li>
+								<li><a href="no-sidebar.html">No Sidebar</a></li>
+								<li>
+									<a href="#">Submenu</a>
+									<ul>
+										<li><a href="#">Option 1</a></li>
+										<li><a href="#">Option 2</a></li>
+										<li><a href="#">Option 3</a></li>
+										<li><a href="#">Option 4</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li><a href="elements.html">Elements</a></li>
+						<li><a href="#" class="button primary">Sign Up</a></li> -->
+
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Main -->
+		<div id="main" class="wrapper style1">
+			<div class="container">
+				<header class="major">
+					<h2>Ordenamiento Topológico</h2>
+					<p>El grafo ingresado debe ser direccionado y acíclico</p>
+					<h3>Color Rojo:Grafo ordenado </h3>
+					<h3>Color Azul:Grafo original</h3>
+				</header>
+
+				<div id="mynetwork"></div>
+				<script type="text/javascript">
+
+					var tiempoInicial = new Date().getTime();//Voy a medir el tiempo de ejecucion de la aplicacion
+
+					(function () {
+
+						//Pido datos del usuario//////////////////////////////////////////////////////////
+						var numNodos = window.prompt("Numero de nodos");
+						//document.write("Num nodos " + numNodos);
+						var numAristas = window.prompt("Numero de aristas");
+
+						var aU = [];
+						var aV = [];
+						for (var i = 0; i < numAristas; i++) {
+							aU[i] = [];
+							aV[i] = [];
+						}
+
+						for (var i = 0; i < numAristas; i++) {
+							aU[i] = window.prompt("Arista " + (i + 1) + ", Nodo de salida: ");
+							aV[i] = window.prompt("Arista " + (i + 1) + ", Nodo de llegada: ");
+						}
+
+						////////////////////////////////////////////////////////////////////////////////////////////
+						var g = new jsgraphs.DiGraph(numNodos); // must be directed acyclic graph
+
+						for (var i = 0; i < numAristas; i++) {
+							g.addEdge(aU[i], aV[i]);
+						}
+						/*
+						g.addEdge(0, 5);
+						g.addEdge(0, 2);
+						g.addEdge(0, 1);
+						g.addEdge(3, 6);
+						g.addEdge(3, 5);
+						g.addEdge(3, 4);
+						g.addEdge(5, 4);
+						g.addEdge(6, 4);
+						g.addEdge(6, 0);
+						g.addEdge(3, 2);
+						g.addEdge(1, 4);
+						*/
+
+						var ts = new jsgraphs.TopologicalSort(g);
+
+						var order = ts.order();
+						console.log(order); // display array which is the topological sort order
+
+						var g_nodes = [];
+						var g_edges = [];
+
+						for (var v = 0; v < g.V; ++v) {
+							g.node(v).label = 'Nodo ' + v; // assigned 'Node {v}' as label for node v
+							g_nodes.push({
+								id: v,
+								label: g.node(v).label
+							});
+						}
+
+						for (var v = 0; v < g.V; ++v) {
+							g.node(v).label = 'Nodo ' + v; // assigned 'Node {v}' as label for node v
+							g_nodes.push({
+								id: (v + g.V),
+								label: g.node(v).label
+							});
+						}
+
+
+						for (var v = 0; v < g.V; ++v) {
+							var adj_v = g.adj(v);
+							for (var i = 0; i < adj_v.length; ++i) {
+								var w = adj_v[i];
+								if (g.edge(v, w).highlighted) continue;
+								g_edges.push({
+									from: v + g.V,
+									to: w + g.V,
+									arrows: 'to'
+								});
+							};
+						}
+
+
+						for (var i = 1; i < order.length; ++i) {
+							var x1 = order[i - 1];
+							var x2 = order[i];
+							if (g.edge(x1, x2) != null)
+								g.edge(x1, x2).highlighted = true;
+							g_edges.push({
+								from: x1,
+								to: x2,
+								color: '#ff0000',
+								arrows: 'to'
+							})
+						}
+
+						console.log(g.V); // display 6, which is the number of vertices in g
+						console.log(g.adj(0)); // display [5, 1, 2], which is the adjacent list to vertex 0
+
+						var nodes = new vis.DataSet(g_nodes);
+
+						// create an array with edges
+						var edges = new vis.DataSet(g_edges);
+
+						// create a network
+						var container = document.getElementById('mynetwork');
+
+
+						var data = {
+							nodes: nodes,
+							edges: edges
+						};
+
+						var options = {};
+						var network = new vis.Network(container, data, options);
+
+						var tiempoFinal = new Date().getTime();
+						document.write(" Tiempo de duracion: " + (tiempoFinal - tiempoInicial) + " milisegundos");
+
+					})();
+					function myFunction() {
+						var popup = document.getElementById("myPopup");
+						popup.classList.toggle("show");
+						var resultado = tiempoFinal - tiempoInicial;
+						document.getElementById('lbResultado').innerHTML = resultado + "milisegundo";
+					}
+
+
+				</script>
+
+			</div>
+			<!-- <ul class="actions ">
+				<li><a href="#" class="button primary" style="margin-left: 600px; margin-right: 200px;">Pseudocodigo</a>
+				</li>
+			</ul>-->
+
+			<div class="popup" onclick="myFunction()" id="resultado" style="background-color: #e44c65;
+			box-shadow: none; color: #ffffff !important;margin-left: 600px; margin-right: 200px;"> Pseudcodigo
+				<span class="popuptext" id="myPopup" style="WIDTH:200%">
+					1.DFS(G)</br>
+					2. For v in G</br>
+					3. If v not visited then</br>
+					4. DFS-Visit(G, v)</br>
+					5. End If</br>
+					6. End For</br>
+					7.End </br>
+
+					8. DFS-Visit(G, u)</br>
+					9. Mark u as visited</br>
+					10. For v in Adj(u)</br>
+					11. If v not visited then</br>
+					12. Insert edge (u, v) in DFS tree</br>
+					13. DFS-Visit(G, v)</br>
+					14. End If</br>
+					15. End For</br>
+					16. End</br>
+					</br>
+
+
+				</span>
+			</div>
+
+			<div class="container">
+				<div class="row">
+					<div class="col-4 col-12-medium">
+						<header>
+							<h2></h2>
+
+						</header>
+					</div>
+					<div class="col-4 col-12-medium">
+						<img style="align-content: center;" src="dfs.jpg" alt="">
+					</div>
+					<div class="col-4 col-12-medium">
+						<h1></h1>
+					</div>
+
+
+				</div>
+			</div>
+			<a href="#two" class="goto-next scrolly">Next</a>
+			</section>
+		</div>
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<ul class="icons">
+				<li><a href="#"><span class="label">Subir</span></a></li>
+			</ul>
+
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
