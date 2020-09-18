@@ -1,37 +1,110 @@
-## Welcome to GitHub Pages
+<!DOCTYPE HTML>
+<html>
 
-You can use the [editor on GitHub](https://github.com/KoriAntunez/Project-Data-Structure/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+<head>
+	<title>Grafos</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="icon" type="image/png" href="faviconED.png">
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<body class="is-preload landing">
+	<div id="page-wrapper">
 
-### Markdown
+		<!-- Header -->
+		<header id="header">
+			<h1 id="logo"><a href="index.html">Inicio</a></h1>
+			<nav id="nav">
+				<ul>
+					<li><a href="OrdenTopo.html">Ordenamiento Topológico</a></li>
+					<li><a href="PuntoArticu.html">Puntos de articulación</a></li>
+					<!-- <li>
+						<a href="#">Layouts</a>
+						<ul>
+							<li><a href="left-sidebar.html">Left Sidebar</a></li>
+							<li><a href="right-sidebar.html">Right Sidebar</a></li>
+							<li><a href="no-sidebar.html">No Sidebar</a></li>
+							<li>
+								<a href="#">Submenu</a>
+								<ul>
+									<li><a href="#">Option 1</a></li>
+									<li><a href="#">Option 2</a></li>
+									<li><a href="#">Option 3</a></li>
+									<li><a href="#">Option 4</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="elements.html">Elements</a></li>
+					<li><a href="#" class="button primary">Sign Up</a></li> -->
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+				</ul>
+			</nav>
+		</header>
 
-```markdown
-Syntax highlighted code block
+		<!-- Banner -->
+		<section id="banner">
+			<div class="content">
 
-# Header 1
-## Header 2
-### Header 3
+				<header>
+					<h2 style="color:rgb(240, 207, 22)">Universidad Nacional Mayor de</h2>
+					<h2 style="color:rgb(240, 207, 22)">San Marcos</h2>
+					<h2>Proyecto Estructura de datos</h2>
+					<p>Ordenamiento Topológico y Puntos de Articulación</p>
+				</header>
+				<span class="image"><img src="smlogo.png" alt="" /></span>
+			</div>
+			<a href="#one" class="goto-next scrolly">Next</a>
+		</section>
 
-- Bulleted
-- List
+		<!-- One -->
+		<section id="one" class="spotlight style1 bottom">
+			<span class="image fit main"><img src="images/fisi.jpg" alt="" /></span>
+			<div class="content">
+				<div class="container">
+					<div class="row">
+						<div class="col-4 col-12-medium">
+							<header>
+								<h2>Desarrolladores</h2>
 
-1. Numbered
-2. List
+							</header>
+						</div>
+						<div class="col-4 col-12-medium">
+							<p>Antúnez Palomino Kori Xiomara</p>
+							<p>Gómez Cavero Mishell</p>
+							<p>Pérez Fonseca Juan Diego</p>
+							<p>Santiago Arapa Naysha Solange</p>
+						</div>
+						<div class="col-4 col-12-medium">
+							<h1 style="color:rgb(240, 207, 22)">Facultad de Ingeniería de Sistemas</h1>
+							<h1 style="color:rgb(240, 207, 22)">e Informática</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="#two" class="goto-next scrolly">Next</a>
+		</section>
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+	</div>
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/KoriAntunez/Project-Data-Structure/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
