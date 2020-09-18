@@ -75,29 +75,54 @@
 
 					(function () {
 
+						
 						//Pido datos del usuario//////////////////////////////////////////////////////////
-						var numNodos = window.prompt("Numero de nodos");
-						//document.write("Num nodos " + numNodos);
-						var numAristas = window.prompt("Numero de aristas");
+								
+						 var opcion = window.prompt("1.Especificar Nodo  -  2.Al Azar");
 
-						var aU = [];
-						var aV = [];
-						for (var i = 0; i < numAristas; i++) {
-							aU[i] = [];
-							aV[i] = [];
-						}
+				          if(opcion == 1){
+				              var numNodos = window.prompt("Numero de nodos");
+				              //document.write("Num nodos " + numNodos);
+				              var numAristas = window.prompt("Numero de aristas");
 
-						for (var i = 0; i < numAristas; i++) {
-							aU[i] = window.prompt("Arista " + (i + 1) + ", Nodo de salida: ");
-							aV[i] = window.prompt("Arista " + (i + 1) + ", Nodo de llegada: ");
-						}
 
-						////////////////////////////////////////////////////////////////////////////////////////////
-						var g = new jsgraphs.DiGraph(numNodos); // must be directed acyclic graph
+				              /////////////////////////////////////////////////////////////////////////////////
+				              var aU = [];
+				              var aV = [];
+				              for (var i = 0; i < numAristas; i++) {
+				                aU[i] = [];
+				                aV[i] = [];
+				              }
+
+				              for (var i = 0; i < numAristas; i++) {
+				                aU[i] = window.prompt("Arista " + (i + 1) + ", Nodo de salida: ");
+				                aV[i] = window.prompt("Arista " + (i + 1) + ", Nodo de llegada: ");
+				              }
+				          }
+				          else if(opcion == 2){
+				                var numNodos = 100;
+				                var numAristas = 300;
+				                var aU = [];
+				                var aV = [];
+				                for (var i = 0; i < numAristas; i++) {
+				                  aU[i] = [];
+				                  aV[i] = [];
+				                }
+				                for (var i = 0; i < numAristas; i++) {
+				                  aU[i] = Math.floor((Math.random() * (numNodos)) + 0);
+				                  aV[i] = Math.floor((Math.random() * (numNodos)) + 0);
+				                   console.log(aU[i] + " " + aV[i]);
+
+				                }
+				          }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				        var g = new jsgraphs.DiGraph(numNodos); // must be directed acyclic graph
 
 						for (var i = 0; i < numAristas; i++) {
 							g.addEdge(aU[i], aV[i]);
 						}
+
 						/*
 						g.addEdge(0, 5);
 						g.addEdge(0, 2);

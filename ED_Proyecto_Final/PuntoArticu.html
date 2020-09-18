@@ -55,20 +55,6 @@
 
           var tiempoInicial = new Date().getTime();//Voy a medir el tiempo de ejecucion de la aplicacion
 
-
-          /*
-          var nNodo;
-           function getData(){//var getData = 
-               nNodo=document.getElementById("nNodos").value;
-               var u=document.getElementById("u").value;
-               var v=document.getElementById("v").value;
-               return nNodo;
-           }
-          nNodo = getData();
-          console.log(nNodo);
-          */
-
-
           var nodosDeArticulacion = [];//Aqui voy a guardar todos los nodos de articulacion que encuentre
 
           //Clase GRAFO/////////////////////////////////////////////////////////////////////////////////////////////
@@ -242,23 +228,44 @@
 
           //Pido datos de usuario por "prompt" (es como una caja de texto)
 
-          var numNodos = window.prompt("Numero de nodos");
-          //document.write("Num nodos " + numNodos);
-          var numAristas = window.prompt("Numero de aristas");
+          var opcion = window.prompt("1.Especificar Nodo  -  2.Al Azar");
+
+          if(opcion == 1){
+              var numNodos = window.prompt("Numero de nodos");
+              //document.write("Num nodos " + numNodos);
+              var numAristas = window.prompt("Numero de aristas");
 
 
-          /////////////////////////////////////////////////////////////////////////////////
-          var aU = [];
-          var aV = [];
-          for (var i = 0; i < numAristas; i++) {
-            aU[i] = [];
-            aV[i] = [];
+              /////////////////////////////////////////////////////////////////////////////////
+              var aU = [];
+              var aV = [];
+              for (var i = 0; i < numAristas; i++) {
+                aU[i] = [];
+                aV[i] = [];
+              }
+
+              for (var i = 0; i < numAristas; i++) {
+                aU[i] = window.prompt("Arista " + (i + 1) + ", Nodo de salida: ");
+                aV[i] = window.prompt("Arista " + (i + 1) + ", Nodo de llegada: ");
+              }
+          }
+          else if(opcion == 2){
+                var numNodos = 100;
+                var numAristas = 300;
+                var aU = [];
+                var aV = [];
+                for (var i = 0; i < numAristas; i++) {
+                  aU[i] = [];
+                  aV[i] = [];
+                }
+                for (var i = 0; i < numAristas; i++) {
+                  aU[i] = Math.floor((Math.random() * (numNodos)) + 0);
+                  aV[i] = Math.floor((Math.random() * (numNodos)) + 0);
+                   console.log(aU[i] + " " + aV[i]);
+
+                }
           }
 
-          for (var i = 0; i < numAristas; i++) {
-            aU[i] = window.prompt("Arista " + (i + 1) + ", Nodo de salida: ");
-            aV[i] = window.prompt("Arista " + (i + 1) + ", Nodo de llegada: ");
-          }
           //document.write("Nodos de salida " + aU);
           ////////////////////////////////////////////////////////////////////////////////
 
@@ -267,12 +274,10 @@
           //var numNodos = 10;
           g = new Grafo(numNodos);
 
-
           //Creo aristas logicas
           for (var i = 0; i < numAristas; i++) {/////////////////////////////////////////////////
             g.addArista(aU[i], aV[i]);
           }
-
 
           //Ejemplo 1
           /* g.addArista(0,3);
